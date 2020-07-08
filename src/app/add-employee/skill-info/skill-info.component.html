@@ -1,0 +1,49 @@
+<form [formGroup]="skillsInfoForm">
+    <div class="form-row" *ngFor = "let skill of skillsCount; index as i">
+        <div class="col-4">
+            <label for="skillName">Skill</label>
+            <input type="text" class="form-control shadow-sm" id="skillName" [formControlName]="dataService.getFormControlName('skill',i)">
+            <span *ngIf="skillsInfoForm.controls['skill' + i].errors!=null">
+                <span class="text-danger" *ngIf="skillsInfoForm.controls['skill' + i].errors.required">
+                    Skill is required
+                </span>
+            </span>
+        </div>
+        <div class="col-1">
+            <label for="skill"></label>
+            <select id="skill" class="form-control shadow-sm">
+                <option *ngFor="let skill of skills">{{skill}}</option>
+            </select>
+        </div>
+
+        <div class="col-5">
+            <label for="skillRating">Rating</label>
+            <input type="range" class="form-control shadow-sm" min="1" max="10" id="skillRating" [formControlName]="dataService.getFormControlName('skillRating',i)">
+            <span *ngIf="skillsInfoForm.controls['skillRating' + i].errors!=null">
+                <span class="text-danger" *ngIf="skillsInfoForm.controls['skillRating' + i].errors.required">
+                    Rating is required
+                </span>
+            </span>
+        </div>
+        <div class="col-1">
+            <span>
+                {{skillsInfoForm.value["skillRating" + i]}}
+            </span>
+        </div>
+        <div class="form-group col-1" *ngIf="i>1">
+            <button type="button" class="close" aria-label="Close" >
+                <span aria-hidden="true" (click)="removeFormControl(i)">&times;</span>
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-10">
+            <button class="btn btn-primary shadow-sm" (click)="addSkill()">Add Skill</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-primary shadow-sm" [disabled]="skillsInfoForm.invalid" (click)="next()">Next</button>
+        </div>
+    </div>
+    
+</form>

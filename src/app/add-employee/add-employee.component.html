@@ -1,0 +1,31 @@
+<div id="main-div">
+    <div id="navbar">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav custom-nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="general" routerLinkActive="active">GENERAL</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav custom-nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="contact" routerLinkActive="active">CONTACT</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav custom-nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="skills" routerLinkActive="active">SKILLS</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav custom-nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="work" routerLinkActive="active">WORK</a>
+                    </li>
+                </ul>
+            </div>
+          </nav>
+    </div>
+    <div id="child-div">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
+</div>

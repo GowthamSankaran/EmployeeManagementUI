@@ -1,0 +1,136 @@
+<div id="employee-detail">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Employee details</h4>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary form-control" (click)="editEmployee()">Edit Employee</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary form-control" (click)="deleteEmployee(employee.id)">Delete Employee</button>
+        </div>
+    </div>
+    <div class="info-tile">        
+        <h5>Personal information</h5>
+        <!-- <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    Employee ID: {{employee.id}}
+                </div>
+                <div class="col-sm">
+                    Name: {{employee.generalInfo.fullName}}
+                </div>
+                <div class="col-sm">
+                    DOB: {{employee.generalInfo.dateOfBirth}}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    Email: {{employee.contactInfo.email}}
+                </div>
+                <div class="col-sm">
+                    Phone: {{employee.contactInfo.phone}}
+                </div>
+                <div class="col-sm">
+                    Total experience: {{employee.workInfo.totalExperience}}
+                </div>
+            </div>
+        </div> -->
+        <div class="info-tile">
+            <table class="table table-bordered mytable-left">
+                <tbody>
+                    <tr class="table-secondary">
+                        <td><b>Employee ID</b></td>
+                        <td>{{employee.id}}</td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td><b>Name</b></td>
+                        <td>{{employee.generalInfo.fullName}}</td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td><b>DOB</b></td>
+                        <td>{{employee.generalInfo.dateOfBirth}}</td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td><b>Email</b></td>
+                        <td>{{employee.contactInfo.email}}</td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td><b>Phone</b></td>
+                        <td>{{employee.contactInfo.phone}}</td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td><b>Total experience</b></td>
+                        <td>{{employee.workInfo.totalExperience}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="info-tile">
+        <h5>Social information</h5>
+        <!-- <div class="container">
+            <div *ngFor="let socialInfo of employee.contactInfo.socialInfos" class="row">
+                <div class="col-sm">
+                    {{socialInfo.type}}: {{socialInfo.url}}
+                </div>
+            </div>
+        </div> -->
+        <div class="info-tile">
+            <table class="table table-bordered mytable">
+                <thead>
+                    <tr class="bg-success">
+                        <th>Application</th>
+                        <th>Profile link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let socialInfo of employee.contactInfo.socialInfos" class="table-secondary">
+                        <td>{{socialInfo.type}}</td>
+                        <td>{{socialInfo.url}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="info-tile">
+        <h5>Skills</h5>
+        <!-- <div class="container">
+            <div *ngFor="let skill of employee.skillsInfo" class="row">
+                <div class="col-sm">
+                    {{skill.name}}
+                </div>
+                <div class="col-sm">
+                    Rating: {{skill.rating}}/10
+                </div>
+            </div>
+        </div> -->
+        <div class="info-tile">
+            <table class="table table-bordered mytable">
+                <thead>
+                    <tr class="bg-success">
+                        <th >Skill</th>
+                        <th >Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let skill of employee.skillsInfo" class="table-secondary">
+                        <td>{{skill.name}}</td>
+                        <td>{{skill.rating}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="info-tile">
+        <h5>Experience</h5>
+        <div class="info-tile experience-info" *ngFor="let experience of employee.workInfo.experienceInfo">
+            <h5>{{experience.role}}</h5>
+            <h6>{{experience.company}}</h6>
+            <span>{{experience.joinedDate | date:'longDate'}} - {{experience.relievedDate | date:'longDate'}} . {{experience.experience}} years</span><br>
+            <span>{{experience.location}}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<form [formGroup]="generalInfoForm">
+    <div class="form-group">
+        <label for="firstName">Firstname</label>
+        <input type="text" class="form-control shadow-sm" id="firstName" formControlName="firstName" placeholder="Firstname*">
+        <span *ngIf="generalInfoForm.controls.firstName.errors!=null">
+            <span class="text-danger" *ngIf="generalInfoForm.controls.firstName.errors.required">
+                Firstname is required
+            </span>
+            <span class="text-danger" *ngIf="generalInfoForm.controls.firstName.errors.pattern!=null">
+                Firstname should contain only alphabets
+            </span>
+            <span class="text-danger" *ngIf="((generalInfoForm.controls.firstName.errors.minlength!=null || generalInfoForm.controls.firstName.errors.maxlength!=null) && generalInfoForm.controls.firstName.errors.pattern==null)">
+                Firstname should contain 3 to 15 characters
+            </span>
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Lastname</label>
+        <input type="text" class="form-control shadow-sm" id="lastName" formControlName="lastName" placeholder="Lastname*">
+        <span *ngIf="generalInfoForm.controls.lastName.errors!=null">
+            <span class="text-danger" *ngIf="generalInfoForm.controls.lastName.errors.required">
+                Lastname is required
+            </span>
+            <span class="text-danger" *ngIf="generalInfoForm.controls.lastName.errors.pattern!=null">
+                Lastname should contain only alphabets
+            </span>
+            <span class="text-danger" *ngIf="((generalInfoForm.controls.lastName.errors.minlength!=null || generalInfoForm.controls.lastName.errors.maxlength!=null) && generalInfoForm.controls.lastName.errors.pattern==null)">
+                Lastname should contain 3 to 15 characters
+            </span>
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="dob">DOB</label>
+        <input type="date" class="form-control shadow-sm" id="dob" formControlName="DOB">
+        <span *ngIf="generalInfoForm.controls.DOB.errors!=null">
+            <span class="text-danger" *ngIf="generalInfoForm.controls.DOB.errors.required">
+                DOB is required
+            </span>
+            <span class="text-danger" *ngIf="(generalInfoForm.controls.DOB.errors.ageRange && !generalInfoForm.controls.DOB.errors.required)">
+                Age should be between 18 and 80
+            </span>
+        </span>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" [disabled]="generalInfoForm.invalid" (click)="next()">Next</button>
+        </div>
+    </div>
+</form>

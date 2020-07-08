@@ -1,0 +1,76 @@
+<form [formGroup]="contactInfoForm">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control shadow-sm" id="email" formControlName="email" placeholder="Email*">
+        <span *ngIf="contactInfoForm.controls.email.errors!=null">
+            <span class="text-danger" *ngIf="contactInfoForm.controls.email.errors.required">
+                Email is required
+            </span>
+            <span class="text-danger" *ngIf="contactInfoForm.controls.email.errors.pattern!=null">
+                Invalid email address
+            </span>
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" class="form-control shadow-sm" id="phone" formControlName="phone" placeholder="Phone*">
+        <span *ngIf="contactInfoForm.controls.phone.errors!=null">
+            <span class="text-danger" *ngIf="contactInfoForm.controls.phone.errors.required">
+                Phone number is required
+            </span>
+            <span class="text-danger" *ngIf="contactInfoForm.controls.phone.errors.pattern!=null">
+                Phone number should contain 10 digits
+            </span>
+        </span>
+    </div>
+    <div>
+        <div class="form-row" *ngFor="let socialInfo of socialInfosCount; index as i">
+            <div class="form-group col-md-3">
+                <label for="website">Website</label>
+                <select id="website" class="form-control shadow-sm" [formControlName]="dataService.getFormControlName('website',i)">
+                    <option value="facebook">Facebook</option>
+                    <option value="twitter">Twitter</option>
+                    <option value="linkedin">LinkedIn</option>
+                </select>
+                <span *ngIf="contactInfoForm.controls['website' + i].errors!=null">
+                    <span class="text-danger" *ngIf="contactInfoForm.controls['website' + i].errors.required">
+                        Website is required
+                    </span>
+                </span>
+            </div>
+            <div class="form-group col-md-8">
+                <label for="websiteUrl" class="col-md-2">URL</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control shadow-sm" id="websiteUrl" [formControlName]="dataService.getFormControlName('websiteUrl',i)" placeholder="Website link">
+                </div>
+                <span *ngIf="contactInfoForm.controls['websiteUrl' + i].errors!=null">
+                    <span class="text-danger" *ngIf="contactInfoForm.controls['websiteUrl' + i].errors.required">
+                        Website URL is required
+                    </span>
+                    <span class="text-danger" *ngIf="contactInfoForm.controls['websiteUrl' + i].errors.pattern!=null">
+                        Website URL is invalid
+                    </span>
+                </span>
+            </div>
+            <div class="form-group col-md-1" *ngIf="i!=0">
+                <button type="button" class="close" aria-label="Close" >
+                    <span aria-hidden="true" (click)="removeFormControl(i)">&times;</span>
+                </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="text-danger" *ngIf="socialInfosCount.length===0">
+                Atleast one social info should be added
+            </span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <button class="btn btn-primary shadow-sm" (click)="addSocialInfo()">Add social info</button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary shadow-sm" [disabled]="(contactInfoForm.invalid || socialInfosCount.length===0)" (click)="next()">Next</button>
+            </div>
+        </div>
+    </div>
+</form>

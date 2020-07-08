@@ -1,0 +1,106 @@
+<form [formGroup]="workInfoForm">
+    <div *ngFor="let work of workInfosCount; index as i">
+        <div class="form-row">
+            <div class="form-group col-md-11">
+
+            </div>
+            <div class="form-group col-md-1">
+                <button type="button" class="close" aria-label="Close" >
+                    <span aria-hidden="true" (click)="removeFormControl(i)">&times;</span>
+                </button>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="company" class="col-md-12">Company name</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control shadow-sm" id="company" [formControlName]="dataService.getFormControlName('company',i)">
+                    <span *ngIf="workInfoForm.controls['company' + i].errors!=null">
+                        <span class="text-danger" *ngIf="workInfoForm.controls['company' + i].errors.required">
+                            Company name is required
+                        </span>
+                        <span class="text-danger" *ngIf="workInfoForm.controls['company' + i].errors.pattern!=null">
+                            Name should contain only alphabets
+                        </span>
+                        <span class="text-danger" *ngIf="((workInfoForm.controls['company' + i].errors.minlength!=null || workInfoForm.controls['company' + i].errors.maxlength!=null) && workInfoForm.controls['company' + i].errors.pattern==null)">
+                            Name should contain 3 to 25 characters
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="role" class="col-md-12">Role</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control shadow-sm" id="role" [formControlName]="dataService.getFormControlName('role',i)">
+                    <span *ngIf="workInfoForm.controls['role' + i].errors!=null">
+                        <span class="text-danger" *ngIf="workInfoForm.controls['role' + i].errors.required">
+                            Role is required
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="location" class="col-md-12">Location</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control shadow-sm" id="location" [formControlName]="dataService.getFormControlName('location',i)" placeholder="city, country">
+                    <span *ngIf="workInfoForm.controls['location' + i].errors!=null">
+                        <span class="text-danger" *ngIf="workInfoForm.controls['location' + i].errors.required">
+                            Location is required
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="companyWebsite" class="col-md-12">Company website</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control shadow-sm" id="companyWebsite" [formControlName]="dataService.getFormControlName('companyWebsite',i)" placeholder="Website link">
+                    <span *ngIf="workInfoForm.controls['companyWebsite' + i].errors!=null">
+                        <span class="text-danger" *ngIf="workInfoForm.controls['companyWebsite' + i].errors.required">
+                            Company website is required
+                        </span>
+                        <span class="text-danger" *ngIf="workInfoForm.controls['companyWebsite' + i].errors.pattern!=null">
+                            Company website URL is invalid
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="joinedDate" class="col-md-12">Joined date</label>
+                <div class="col-md-12">
+                    <input type="date" class="form-control shadow-sm" id="joinedDate" [formControlName]="dataService.getFormControlName('joinedDate',i)">
+                    <span *ngIf="workInfoForm.controls['joinedDate' + i].errors!=null">
+                        <span class="text-danger" *ngIf="workInfoForm.controls['joinedDate' + i].errors.required">
+                            Joined date is required
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="relievedDate" class="col-md-12">Relieved date</label>
+                <div class="col-md-12">
+                    <input type="date" class="form-control shadow-sm" id="relievedDate" [formControlName]="dataService.getFormControlName('relievedDate',i)">
+                    <span *ngIf="workInfoForm.controls['relievedDate' + i].errors!=null">
+                        <span class="text-danger" *ngIf="workInfoForm.controls['relievedDate' + i].errors.required">
+                            Relieved date is required
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-10">
+            <button class="btn btn-primary shadow-sm" (click)="addExperience()">Add experience</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary shadow-sm" [disabled]="workInfoForm.invalid" (click)="submit()">Submit</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,49 @@
+<div id="employees">
+    <form>
+        <div class="form-group row">
+            <div class="col-sm-3 col-form-label">
+        
+            </div>
+            <label for="name" class="col-sm-1 col-form-label">Search: </label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="name" [(ngModel)]="searchParam" name="searchParam" placeholder="Enter name or ID">
+            </div>
+            <button class="btn btn-primary col-sm-1" (click)="search()">Search</button>
+
+            <label for="name" class="col-sm-1 col-form-label">Sort by: </label>
+            <div class="col-sm-2">
+                <select class="form-control" [(ngModel)]="sortParam" name="sortParam" (change)="sortEmployees()">
+                    <option value="fullName">Name</option>
+                    <option value="email">Email</option>
+                    <option value="totalExperience">Experience</option>
+                </select>
+            </div>
+            <button class="btn btn-primary col-sm-2" (click)="addEmployee()">Add Employee</button>
+        </div>
+    </form>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="bg-success">
+                <th scope="col">Emp ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Experience</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees" (click)="selectEmployee(employee)" class="table-secondary">
+                <td>{{employee.id}}</td>
+                <td>{{employee.generalInfo.fullName}}</td>
+                <td>{{employee.generalInfo.dateOfBirth}}</td>
+                <td>{{employee.contactInfo.email}}</td>
+                <td>{{employee.contactInfo.phone}}</td>
+                <td>{{employee.workInfo.totalExperience}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="page-header errorMessage text-danger" *ngIf="errorMessage">
+        <h5>{{errorMessage}}</h5>
+    </div>
+</div>
